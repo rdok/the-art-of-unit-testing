@@ -5,15 +5,15 @@ namespace src\prototypes\private_variables;
 class Acme
 {
     /** @var ExpectedClass */
-    private $expectedClass;
+    private $aProperty;
 
     public function __construct()
     {
-        $this->expectedClass = new ExpectedClass;
+        $this->aProperty = new ExpectedClass;
     }
 
     public function handle()
     {
-        $this->expectedClass->handle();
+        $this->aProperty->handle();
     }
 }
