@@ -8,13 +8,23 @@ use tests\TestCase;
 class LogAnalyzerTest extends TestCase
 {
     /** @test */
+    public function isValidFileName_validFile_ReturnsTrue()
+    {
+        $logAnalyzer = new LogAnalyzer();
+
+        $isValidLogFileName = $logAnalyzer->isValidFileName('valid.SLF');
+
+        $this->assertTrue($isValidLogFileName);
+    }
+
+    /** @test */
     public function it_may_determine_if_a_filename_is_invalid()
     {
         $logAnalyzer = new LogAnalyzer();
 
-        $isValidLogFileName = $logAnalyzer->isValidLogFileName('invalid-file-name');
+        $isValidLogFileName = $logAnalyzer->isValidFileName('invalid-file-name');
 
-       $this->assertFalse($isValidLogFileName) ;
+        $this->assertFalse($isValidLogFileName);
     }
 
     /** @test */
@@ -22,9 +32,9 @@ class LogAnalyzerTest extends TestCase
     {
         $logAnalyzer = new LogAnalyzer();
 
-        $isValidLogFileName = $logAnalyzer->isValidLogFileName('valid.SLF');
+        $isValidLogFileName = $logAnalyzer->isValidFileName('valid.SLF');
 
-       $this->assertTrue($isValidLogFileName) ;
+        $this->assertTrue($isValidLogFileName);
     }
 
     /** @test */
@@ -32,9 +42,9 @@ class LogAnalyzerTest extends TestCase
     {
         $logAnalyzer = new LogAnalyzer();
 
-        $isValidLogFileName = $logAnalyzer->isValidLogFileName('valid.SlF');
+        $isValidLogFileName = $logAnalyzer->isValidFileName('valid.SlF');
 
-        $this->assertTrue($isValidLogFileName) ;
+        $this->assertTrue($isValidLogFileName);
     }
 
     /** @test */
@@ -44,7 +54,7 @@ class LogAnalyzerTest extends TestCase
 
         $logAnalyzer = new LogAnalyzer();
 
-        $logAnalyzer->isValidLogFileName(null);
+        $logAnalyzer->isValidFileName(null);
     }
 
     /** @test */
@@ -54,6 +64,30 @@ class LogAnalyzerTest extends TestCase
 
         $logAnalyzer = new LogAnalyzer();
 
-        $logAnalyzer->isValidLogFileName('');
+        $logAnalyzer->isValidFileName('');
+    }
+
+    /** @test */
+    public function it_may_keep_track_the_valid_status_of_the_last_filename_checked()
+    {
+        $logAnalyzer = new LogAnalyzer();
+
+        $logAnalyzer->isValidFileName('invalid-file-name');
+        $this->assertFalse($logAnalyzer->wasLastFilenNameValid());
+
+        $logAnalyzer->isValidFileName('valid.slf');
+        $this->assertTrue($logAnalyzer->wasLastFilenNameValid());
+    }
+
+    /** @test */
+    public function it_may_keep_track_the_invalid_status_of_the_last_filename_checked()
+    {
+        $logAnalyzer = new LogAnalyzer();
+
+        $logAnalyzer->isValidFileName('valid.slf');
+        $this->assertTrue($logAnalyzer->wasLastFilenNameValid());
+
+        $logAnalyzer->isValidFileName('invalid');
+        $this->assertFalse($logAnalyzer->wasLastFilenNameValid());
     }
 }

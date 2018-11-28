@@ -4,7 +4,10 @@ namespace src\ch2_FirstStepsWithPHPUnit;
 
 class LogAnalyzer
 {
-    public function isValidLogFileName($string)
+    /** @var boolean */
+    private $wasLastFilenNameValid;
+
+    public function isValidFileName($string)
     {
         if (empty($string)) {
             throw new \InvalidArgumentException('No filename provided!');
@@ -14,6 +17,13 @@ class LogAnalyzer
 
         $string = strtoupper($string);
 
-        return substr($string, -strlen($suffix)) === $suffix;
+        $this->wasLastFilenNameValid = substr($string, -strlen($suffix)) === $suffix;
+
+        return $this->wasLastFilenNameValid;
+    }
+
+    public function wasLastFilenNameValid()
+    {
+        return $this->wasLastFilenNameValid;
     }
 }
