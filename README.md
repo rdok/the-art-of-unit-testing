@@ -5,3 +5,4 @@ Reflections &amp; experiments studying the art of Unit Testing.
 
 [Experiments & Protypes](https://github.com/rdok/the-art-of-unit-testing/tree/experiments-and-prototypes)
  - Testing private properties.
+ 
