@@ -1,8 +1,8 @@
 <?php
 
-namespace tests\ch1_TheBasicsOfUnitTesting;
+namespace tests\unit;
 
-use src\ch1_TheBasicsOfUnitTesting\SimpleParser;
+use src\SimpleParser;
 use tests\TestCase;
 
 class SimpleParserTest extends TestCase

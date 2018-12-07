@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\prototypes\private_property;
+namespace tests\unit\prototypes\private_property;
 
 use src\prototypes\private_variables\Acme;
 use src\prototypes\private_variables\ExpectedClass;

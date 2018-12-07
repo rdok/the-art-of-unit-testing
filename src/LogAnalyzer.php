@@ -1,6 +1,6 @@
 <?php
 
-namespace src\ch2_FirstStepsWithPHPUnit;
+namespace src;
 
 class LogAnalyzer
 {
@@ -22,7 +22,7 @@ class LogAnalyzer
         return $this->wasLastFilenNameValid;
     }
 
-    public function wasLastFilenNameValid()
+    public function wasLastFileNameValid()
     {
         return $this->wasLastFilenNameValid;
     }

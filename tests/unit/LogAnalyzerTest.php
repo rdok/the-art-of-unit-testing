@@ -1,8 +1,8 @@
 <?php
 
-namespace tests\ch2_FirstStepsWithPHPUnit;
+namespace tests\unit;
 
-use src\ch2_FirstStepsWithPHPUnit\LogAnalyzer;
+use src\LogAnalyzer;
 use tests\TestCase;
 
 class LogAnalyzerTest extends TestCase
@@ -73,10 +73,10 @@ class LogAnalyzerTest extends TestCase
         $logAnalyzer = new LogAnalyzer();
 
         $logAnalyzer->isValidFileName('invalid-file-name');
-        $this->assertFalse($logAnalyzer->wasLastFilenNameValid());
+        $this->assertFalse($logAnalyzer->wasLastFileNameValid());
 
         $logAnalyzer->isValidFileName('valid.slf');
-        $this->assertTrue($logAnalyzer->wasLastFilenNameValid());
+        $this->assertTrue($logAnalyzer->wasLastFileNameValid());
     }
 
     /** @test */
@@ -85,9 +85,9 @@ class LogAnalyzerTest extends TestCase
         $logAnalyzer = new LogAnalyzer();
 
         $logAnalyzer->isValidFileName('valid.slf');
-        $this->assertTrue($logAnalyzer->wasLastFilenNameValid());
+        $this->assertTrue($logAnalyzer->wasLastFileNameValid());
 
         $logAnalyzer->isValidFileName('invalid');
-        $this->assertFalse($logAnalyzer->wasLastFilenNameValid());
+        $this->assertFalse($logAnalyzer->wasLastFileNameValid());
     }
 }
