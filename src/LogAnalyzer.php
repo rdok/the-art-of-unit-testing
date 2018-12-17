@@ -5,25 +5,24 @@ namespace src;
 class LogAnalyzer
 {
     /** @var boolean */
-    private $wasLastFilenNameValid;
+    private $wasLastFileNameValid;
+    /** @var FileExtensioner */
+    private $fileExtensioner;
+
+    public function __construct(FileExtensioner $fileExtensioner)
+    {
+        $this->fileExtensioner = $fileExtensioner;
+    }
 
     public function isValidFileName($string)
     {
-        if (empty($string)) {
-            throw new \InvalidArgumentException('No filename provided!');
-        }
+        $this->wasLastFileNameValid = $this->fileExtensioner->isValid($string);
 
-        $suffix = '.SLF';
-
-        $string = strtoupper($string);
-
-        $this->wasLastFilenNameValid = substr($string, -strlen($suffix)) === $suffix;
-
-        return $this->wasLastFilenNameValid;
+        return $this->wasLastFileNameValid;
     }
 
     public function wasLastFileNameValid()
     {
-        return $this->wasLastFilenNameValid;
+        return $this->wasLastFileNameValid;
     }
 }
