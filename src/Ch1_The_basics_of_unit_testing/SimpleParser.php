@@ -1,6 +1,6 @@
 <?php
 
-namespace src;
+namespace src\Ch1_The_basics_of_unit_testing;
 
 class SimpleParser
 {

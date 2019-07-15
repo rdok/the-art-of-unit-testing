@@ -1,8 +1,8 @@
 <?php
 
-namespace tests\unit;
+namespace tests\unit\Ch1_The_basics_of_unit_testing;
 
-use src\SimpleParser;
+use src\Ch1_The_basics_of_unit_testing\SimpleParser;
 use tests\TestCase;
 
 class SimpleParserTest extends TestCase
@@ -26,7 +26,7 @@ class SimpleParserTest extends TestCase
     }
 
     /** @test */
-    public function it_returns_an_integer_if_it_contais_numbers()
+    public function it_returns_the_number_if_a_single_number_is_given()
     {
         $actual = $this->simpleParser->parseAndSum('1');
 
