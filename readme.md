@@ -1,6 +1,9 @@
 # the-art-of-unit-testing [![Build Status](https://jenkins.rdok.dev/buildStatus/icon?job=the-art-of-unit-testing%2Fch1-the-basic-of-unit-testing&style=flat-square)](https://jenkins.rdok.dev/job/the-art-of-unit-testing/job/ch1-the-basic-of-unit-testing/)
 Reflections &amp; experiments studying the art of Unit Testing. 
 
+## Requirements
+Docker
+
 [Chapter 3 - Using stubs to break dependencies](https://github.com/rdok/the-art-of-unit-testing/tree/ch3-using-stubs-to-break-dependencies) . 
 
 [Experiments & Protypes](https://github.com/rdok/the-art-of-unit-testing/tree/experiments-and-prototypes)

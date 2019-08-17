@@ -1,0 +1,5 @@
+docker run --rm --interactive --tty \
+    --volume $PWD:/app \
+    --workdir /app \
+    php:7.2-cli ./vendor/bin/phpunit \
+    "$@"
