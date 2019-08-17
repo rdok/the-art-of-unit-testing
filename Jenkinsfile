@@ -1,5 +1,5 @@
 pipeline {
-    agent linux
+    agent { label 'linux' }
     environment {
         AUTHOR_EMAIL = """${sh(
             returnStdout: true,
