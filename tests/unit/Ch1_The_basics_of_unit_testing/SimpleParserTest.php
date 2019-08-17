@@ -22,7 +22,6 @@ class SimpleParserTest extends TestCase
     {
         $actual = $this->simpleParser->parseAndSum('');
 
-        $this->assertTrue(false);
         $this->assertSame(0, $actual);
     }
 
