@@ -1,5 +1,11 @@
 node {
     try {
+        environment {
+            AUTHOR_EMAIL = """${sh(
+                returnStdout: true,
+                script: 'git show -s --format="%ae" HEAD | sed "s/^ *//;s/ *$//"'
+            )}"""
+        }
         syntax-error
         stage('Source') {
             git url: 'git@github.com:rdok/the-art-of-unit-testing-in-php.git', 
@@ -15,7 +21,7 @@ node {
         currentBuild.result = 'FAILURE'
         emailext body: "Failure: ${err} <br/><br/> Console output at $BUILD_URL.", 
         subject: 'Failure: $BUILD_DISPLAY_NAME | $JOB_BASE_NAME', 
-        to: '$GIT_AUTHOR_EMAIL'
+        to: '$AUTHOR_EMAIL'
     }
 }
 
