@@ -1,5 +1,6 @@
 node {
     try {
+        syntax-error
         stage('Source') {
             git url: 'git@github.com:rdok/the-art-of-unit-testing-in-php.git', 
                 credentialsId: 'cb82a506-329c-4dcb-af9c-63661e0a5f28'
@@ -14,6 +15,7 @@ node {
         currentBuild.result = 'FAILURE'
         emailext body: "Failure: ${err} <br/><br/> Console output at $BUILD_URL.", 
         subject: 'Failure: $BUILD_DISPLAY_NAME | $JOB_BASE_NAME', 
-        to: '***REMOVED***'
+        to: '$GIT_AUTHOR_EMAIL'
     }
 }
+
