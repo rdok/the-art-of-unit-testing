@@ -7,5 +7,10 @@
       "tests\\": "tests",
       "src\\": "src"
     }
+  },
+  "autoload-dev": {
+    "files": [
+      "tests/_support/helpers.php"
+    ]
   }
 }

@@ -2,6 +2,7 @@
 
 namespace tests\unit\Ch1_The_basics_of_unit_testing;
 
+use InvalidArgumentException;
 use src\Ch1_The_basics_of_unit_testing\SimpleParser;
 use tests\TestCase;
 
@@ -26,18 +27,27 @@ class SimpleParserTest extends TestCase
     }
 
     /** @test */
-    public function it_returns_the_number_if_a_single_number_is_given()
+    public function it_parses_the_number_when_no_comma_is_present()
     {
-        $actual = $this->simpleParser->parseAndSum('1');
+        $actual = $this->simpleParser->parseAndSum('5');
 
-        $this->assertSame(1, $actual);
+        $this->assertSame(5, $actual);
     }
 
     /** @test */
-    public function it_returns_the_sum_if_it_contains_many_numbers()
+    public function it_parses_and_sums_two_numbers()
     {
-        $actual = $this->simpleParser->parseAndSum('1,2');
+        $actual = $this->simpleParser->parseAndSum('5,7');
 
-        $this->assertSame(3, $actual);
+        $this->assertSame(12, $actual);
+    }
+
+    /** @test */
+    public function it_errors_for_non_integer_numbers()
+    {
+        $this->expectExceptionMessage('Can only handle integer numbers.');
+        $this->expectException(InvalidArgumentException::class);
+
+        $this->simpleParser->parseAndSum('1.2');
     }
 }
