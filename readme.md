@@ -1,14 +1,10 @@
 # the art of Unit Testing in PHP 
 [![Build Status](https://jenkins.rdok.dev/buildStatus/icon?job=the-art-of-unit-testing%2Fthe-art-of-unit-testing-in-php)](https://jenkins.rdok.dev/job/the-art-of-unit-testing/job/the-art-of-unit-testing-in-php/)
+ 
+ > Here's the scenario. Your company has many internal products it uses to monitor its applications at customer sites. All these products write log files and place them in a special directory. The log files are written in a proprietary format that your company has come up with that can't be parsed by any existing third-party tools. You're tasked with building a product, LogAn, that can analyze these log files and find special cases and events in them. When it finds these cases and events, it should alert the appropriate parties.
 
-Reflections &amp; experiments studying the art of Unit Testing. 
+Major features: LogAn's parsing, event-recognition, and notification abilities. 
 
-## Requirements
-Docker
+Each chapter is covered in it's own unit folder. At the end we'll have an additional folder completing the whole image.
 
-[Chapter 3 - Using stubs to break dependencies](https://github.com/rdok/the-art-of-unit-testing/tree/ch3-using-stubs-to-break-dependencies) . 
 
-[Experiments & Protypes](https://github.com/rdok/the-art-of-unit-testing/tree/experiments-and-prototypes)
- - Testing private properties.
-> A stub is a controllable replacement for an existing dependency (or collaborator) in the system. By using a stub, you can test your code without dealing with the dependency directly.
->  An external dependency is an object in your system that your code under test interacts with, and over which you have no control. Common examples are filesystems, threads, memory, time, and so on.

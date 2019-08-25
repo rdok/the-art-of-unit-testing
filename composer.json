@@ -4,11 +4,13 @@
   },
   "autoload": {
     "psr-4": {
-      "tests\\": "tests",
       "src\\": "src"
     }
   },
   "autoload-dev": {
+    "psr-4": {
+      "tests\\": "tests"
+    },
     "files": [
       "tests/_support/helpers.php"
     ]
