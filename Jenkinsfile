@@ -43,8 +43,10 @@ pipeline {
         }
         always {
             publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: false, reportDir: 'testdox', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: ''])
-            slackSend color: '',
-                message: "${currentBuild.result?:'SUCCESS'} - ${env.JOB_NAME}:#${env.BUILD_NUMBER} (<${env.BUILD_URL}console | Console output>)"
+            slackSend channel: '#the-art-of-unit-testing-in-php',
+                message: """@here Always - ${env.JOB_BASE_NAME}:#${env.BUILD_NUMBER}
+                (<${env.BUILD_URL}console | Console output>)
+                """
         }
     }
 }
