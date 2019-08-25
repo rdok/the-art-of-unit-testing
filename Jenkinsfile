@@ -23,8 +23,7 @@ pipeline {
                 compressLog: true,
                 subject: "Failure - ${env.JOB_BASE_NAME}:#${env.BUILD_NUMBER}",
                 to: "${AUTHOR_EMAIL}"
-            slackSend channel: '#the-art-of-unit-testing-in-php',
-                color: '#FF0000',
+            slackSend color: '#FF0000',
                 message: "@here Failed: <${env.BUILD_URL}console | ${env.JOB_BASE_NAME}#${env.BUILD_NUMBER}>"
         }
         fixed {
@@ -34,12 +33,16 @@ pipeline {
                 compressLog: true,
                 subject: "Fixed - ${env.JOB_BASE_NAME}#${env.BUILD_NUMBER}",
                 to: "${AUTHOR_EMAIL}"
-            slackSend channel: '#the-art-of-unit-testing-in-php',
-                color: 'good',
+            slackSend color: 'good',
                 message: "@here Fixed: <${env.BUILD_URL}console | ${env.JOB_BASE_NAME}#${env.BUILD_NUMBER}>"
+        }
+        success {
+            slackSend message: "Stable: <${env.BUILD_URL}console | ${env.JOB_BASE_NAME}#${env.BUILD_NUMBER}>"
         }
         always {
             publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: false, reportDir: 'testdox', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: ''])
+            slackSend color: 'good',
+                message: "@here : <${env.BUILD_URL}console | ${env.JOB_BASE_NAME}#${env.BUILD_NUMBER}>"
         }
     }
 }
