@@ -21,7 +21,7 @@ pipeline {
                     ${env.JOB_BASE_NAME}#${env.BUILD_NUMBER}</a></p>
                     """,
                 compressLog: true,
-                subject: "${currentBuild.result?:'SUCCESS'} - ${env.JOB_BASE_NAME}:#${env.BUILD_NUMBER}",
+                subject: "Failure - ${env.JOB_BASE_NAME}:#${env.BUILD_NUMBER}",
                 to: "${AUTHOR_EMAIL}"
         }
         fixed {
@@ -30,7 +30,7 @@ pipeline {
                     ${env.JOB_BASE_NAME}#${env.BUILD_NUMBER}</a></p>
                     """,
                 compressLog: true,
-                subject: "${currentBuild.result?:'FIXED'} - ${env.JOB_BASE_NAME}:#${env.BUILD_NUMBER}",
+                subject: "Fixed - ${env.JOB_BASE_NAME}:#${env.BUILD_NUMBER}",
                 to: "${AUTHOR_EMAIL}"
         }
         always {
