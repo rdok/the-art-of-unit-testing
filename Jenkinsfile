@@ -30,7 +30,6 @@ pipeline {
                     ${currentBuild.result?:'SUCCESS'} - ${env.JOB_BASE_NAME}:#${env.BUILD_NUMBER}
                     """,
                 to: "${AUTHOR_EMAIL}"
-            }
         }
         always {
             publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: false, reportDir: 'testdox', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: ''])
