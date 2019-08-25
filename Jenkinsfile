@@ -24,8 +24,8 @@ pipeline {
                 subject: "Failure - ${env.JOB_BASE_NAME}:#${env.BUILD_NUMBER}",
                 to: "${AUTHOR_EMAIL}"
             slackSend channel: '#the-art-of-unit-testing-in-php',
-                color: 'error',
-                message: "@here Failed: (<${env.BUILD_URL}console | ${env.JOB_BASE_NAME}#${env.BUILD_NUMBER}>)"
+                color: 'red',
+                message: "@here Failed: <${env.BUILD_URL}console | ${env.JOB_BASE_NAME}#${env.BUILD_NUMBER}>"
         }
         fixed {
             emailext attachLog: true,
@@ -36,7 +36,7 @@ pipeline {
                 to: "${AUTHOR_EMAIL}"
             slackSend channel: '#the-art-of-unit-testing-in-php',
                 color: 'good',
-                message: "@here Fixed: (<${env.BUILD_URL}console | ${env.JOB_BASE_NAME}#${env.BUILD_NUMBER}>)"
+                message: "@here Fixed: <${env.BUILD_URL}console | ${env.JOB_BASE_NAME}#${env.BUILD_NUMBER}>"
         }
         always {
             publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: false, reportDir: 'testdox', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: ''])
