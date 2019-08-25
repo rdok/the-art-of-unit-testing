@@ -24,29 +24,24 @@ pipeline {
                 subject: "Failure - ${env.JOB_BASE_NAME}:#${env.BUILD_NUMBER}",
                 to: "${AUTHOR_EMAIL}"
             slackSend channel: '#the-art-of-unit-testing-in-php',
+                color: 'bad',
                 message: """@here Failure - ${env.JOB_BASE_NAME}:#${env.BUILD_NUMBER}
-                (<${env.BUILD_URL}console | Console output>)
-                """
+                (<${env.BUILD_URL}console | Console output>)"""
         }
         fixed {
             emailext attachLog: true,
                 body: """<p>View console output at <a href='${env.BUILD_URL}/console'>
-                    ${env.JOB_BASE_NAME}#${env.BUILD_NUMBER}</a></p>
-                    """,
+                ${env.JOB_BASE_NAME}#${env.BUILD_NUMBER}</a></p>""",
                 compressLog: true,
                 subject: "Fixed - ${env.JOB_BASE_NAME}:#${env.BUILD_NUMBER}",
                 to: "${AUTHOR_EMAIL}"
             slackSend channel: '#the-art-of-unit-testing-in-php',
+                color: 'good',
                 message: """@here Fixed - ${env.JOB_BASE_NAME}:#${env.BUILD_NUMBER}
-                (<${env.BUILD_URL}console | Console output>)
-                """
+                (<${env.BUILD_URL}console | Console output>)"""
         }
         always {
             publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: false, reportDir: 'testdox', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: ''])
-            slackSend channel: '#the-art-of-unit-testing-in-php',
-                message: """@here Always - ${env.JOB_BASE_NAME}:#${env.BUILD_NUMBER}
-                (<${env.BUILD_URL}console | Console output>)
-                """
         }
     }
 }
