@@ -21,14 +21,16 @@ pipeline {
                     ${env.JOB_BASE_NAME}#${env.BUILD_NUMBER}</a></p>
                     """,
                 compressLog: true,
-                recipientProviders: [
-                    [$class: 'DevelopersRecipientProvider'],
-                    [$class: 'RequesterRecipientProvider']
-                ],
-                replyTo: 'do-not-reply@jenkins.rdok.dev',
-                subject: """
-                    ${currentBuild.result?:'SUCCESS'} - ${env.JOB_BASE_NAME}:#${env.BUILD_NUMBER}
+                subject: "${currentBuild.result?:'SUCCESS'} - ${env.JOB_BASE_NAME}:#${env.BUILD_NUMBER}",
+                to: "${AUTHOR_EMAIL}"
+        }
+        fixed {
+            emailext attachLog: true,
+                body: """<p>View console output at <a href='${env.BUILD_URL}/console'>
+                    ${env.JOB_BASE_NAME}#${env.BUILD_NUMBER}</a></p>
                     """,
+                compressLog: true,
+                subject: "${currentBuild.result?:'FIXED'} - ${env.JOB_BASE_NAME}:#${env.BUILD_NUMBER}",
                 to: "${AUTHOR_EMAIL}"
         }
         always {
