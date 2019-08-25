@@ -11,14 +11,29 @@ pipeline {
             steps { sh 'docker run --rm -v $PWD:/app composer install' }
         }
         stage('Test') {
-            steps { sh 'docker run --rm -v $PWD:/app -w /app php:7.2-cli ./vendor/bin/phpunit' }
+            steps { sh 'docker run --rm -v $PWD:/app -w /app php:7.2-cli ./vendor/bin/phpunit --testdox-html testdox/index.html' }
         }
     }
     post {
         failure {
-            emailext body: "Failure: ${err} <br/><br/> Console output at $BUILD_URL.", 
-                subject: 'Failure: $BUILD_DISPLAY_NAME | $JOB_BASE_NAME', 
+            emailext attachLog: true,
+                body: """<p>View console output at <a href='${env.BUILD_URL}/console'>
+                    ${env.JOB_BASE_NAME}#${env.BUILD_NUMBER}</a></p>
+                    """,
+                compressLog: true,
+                recipientProviders: [
+                    [$class: 'DevelopersRecipientProvider'],
+                    [$class: 'RequesterRecipientProvider']
+                ],
+                replyTo: 'do-not-reply@jenkins.rdok.dev',
+                subject: """
+                    ${currentBuild.result?:'SUCCESS'} - ${env.JOB_BASE_NAME}:#${env.BUILD_NUMBER}
+                    """,
                 to: "${AUTHOR_EMAIL}"
+            }
+        }
+        always {
+            publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: false, reportDir: 'testdox', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: ''])
         }
     }
 }
