@@ -8,7 +8,6 @@ class SimpleParser
 {
     public function parseAndSum($string)
     {
-        return;
         if (empty($string)) {
             return 0;
         }
