@@ -24,7 +24,7 @@ pipeline {
                 subject: "Failure - ${env.JOB_BASE_NAME}:#${env.BUILD_NUMBER}",
                 to: "${AUTHOR_EMAIL}"
             slackSend channel: '#the-art-of-unit-testing-in-php',
-                color: 'red',
+                color: '#FF0000',
                 message: "@here Failed: <${env.BUILD_URL}console | ${env.JOB_BASE_NAME}#${env.BUILD_NUMBER}>"
         }
         fixed {
