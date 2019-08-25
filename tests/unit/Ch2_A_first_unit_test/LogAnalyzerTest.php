@@ -40,7 +40,7 @@ class LogAnalyzerTest extends TestCase
 
         $message = "Failed asserting '$filename' is an invalid file name.";
 
-        $this->assertTrue($condition, $message);
+        $this->assertFalse($condition, $message);
     }
 
     public function validNames()
