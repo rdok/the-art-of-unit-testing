@@ -1,0 +1,26 @@
+#!/bin/bash
+
+docker run --rm -it \
+  --volume "$PWD":/app \
+  --workdir /app \
+  php:7.2-cli ./vendor/bin/phpunit-watcher watch
+
+# See https://github.com/rdok/the-art-of-unit-testing-in-php/issues/2
+#while IFS= read -r output; do
+#  outputFilename="/tmp/output"
+#  echo "$output"
+#  echo "$output" >"$outputFilename"
+#
+#  # TODO: patch issue: terminal window has to be focused for the watcher to
+#  # execute the tests; Removing the value notify-send to pro-actively notify
+#  # the developer -.-
+#  # Further debugging, located the phpunit-watcher
+#  if grep -q "FAILURES!" "$outputFilename"; then
+#    notify-send "Failed"
+#  else
+#    notify-send "Passed"
+#  fi
+#done < <(docker run --rm -it \
+#  --volume "$PWD":/app \
+#  --workdir /app \
+#  php:7.2-cli ./vendor/bin/phpunit-watcher watch)

@@ -2,6 +2,8 @@
 
 namespace tests\unit\Ch2_A_first_unit_test;
 
+use Exception;
+use InvalidArgumentException;
 use src\Ch2_A_first_unit_test\LogAnalyzer;
 use tests\TestCase;
 
@@ -43,26 +45,59 @@ class LogAnalyzerTest extends TestCase
         $this->assertFalse($condition, $message);
     }
 
+    /**
+     * @test
+     * @dataProvider emptyFilenames
+     */
+    public function it_errors_for_empty_filename($filename)
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        $this->expectExceptionMessage('Filename cannot be empty.');
+
+        $this->logAnalyzer->isValidFileName($filename);
+    }
+
     public function validNames()
     {
-        return [
-            ['name.slf'],
-            ['name.SLF'],
-            ['name.SlF'],
-        ];
+        return [['name.slf'], ['name.SLF'], ['name.SlF'],];
     }
 
     public function invalidNames()
     {
-        return [
-            ['name'],
-            [''],
-            [null],
-            ['name.sl'],
-            ['name.1'],
-            ['.'],
-            ['.slf'],
-            ['.sl'],
-        ];
+        return [['name'], ['name.sl'], ['name.1'], ['.'], ['.slf'], ['.sl'],];
+    }
+
+    public function emptyFilenames()
+    {
+        return [[''], [null],];
+    }
+
+    /** @test */
+    public function it_keeps_track_of_latest_valid_filename_validity()
+    {
+        $this->logAnalyzer->isValidFileName('filename.slf');
+
+        $this->assertTrue($this->logAnalyzer->lastFilenameValidity);
+    }
+
+    /** @test */
+    public function it_keeps_track_of_latest_invalid_filename_validity()
+    {
+        $this->logAnalyzer->isValidFileName('invalid');
+
+        $this->assertFalse($this->logAnalyzer->lastFilenameValidity);
+    }
+
+    /** @test */
+    public function it_keeps_track_of_latest_invalid_filename_validity_on_error()
+    {
+        try {
+            $this->logAnalyzer->isValidFileName('');
+        } catch (Exception $e) {
+
+        }
+
+        $this->assertFalse($this->logAnalyzer->lastFilenameValidity);
     }
 }
