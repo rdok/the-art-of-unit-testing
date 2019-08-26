@@ -16,7 +16,7 @@ pipeline {
         }
         fixed {
             emailext subject: "Fixed - ${env.JOB_BASE_NAME}#${env.BUILD_NUMBER}", to: "${AUTHOR_EMAIL}",
-                body: "<p><a href='${env.BUILD_URL}/console'>View ${env.JOB_BASE_NAME}#${env.BUILD_NUMBER}</a></p>",
+                body: "<p><a href='${env.BUILD_URL}/console'>View ${env.JOB_BASE_NAME}#${env.BUILD_NUMBER}</a></p>"
             slackSend color: 'good',
                 message: "@here Fixed: <${env.BUILD_URL}console | ${env.JOB_BASE_NAME}#${env.BUILD_NUMBER}>"
         }
